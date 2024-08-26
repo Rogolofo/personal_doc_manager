@@ -15,19 +15,55 @@ Key features:
 
 ```
 personal_doc_manager/
+├── pyproject.toml
+├── .pre-commit-config.yaml
+├── docker-compose.yml
 ├── src/
 │   ├── pdms/
+│   │   ├── __init__.py
 │   │   ├── api/
+│   │   │   ├── __init__.py
+│   │   │   └── routes.py
 │   │   ├── core/
+│   │   │   ├── __init__.py
+│   │   │   ├── document_processor.py
+│   │   │   └── ocr.py
 │   │   ├── ml/
+│   │   │   ├── __init__.py
+│   │   │   └── classifier.py
 │   │   ├── db/
+│   │   │   ├── __init__.py
+│   │   │   ├── sql_models.py
+│   │   │   ├── nosql_models.py
+│   │   │   └── db_manager.py
 │   │   ├── web/
+│   │   │   ├── __init__.py
+│   │   │   ├── app.py
+│   │   │   └── templates/
+│   │   │       ├── base.html
+│   │   │       ├── index.html
+│   │   │       └── document_view.html
 │   │   └── utils/
+│   │       ├── __init__.py
+│   │       ├── decorators.py
+│   │       └── context_managers.py
 │   └── celery_worker.py
 ├── tests/
+│   ├── unit/
+│   │   ├── test_document_processor.py
+│   │   └── test_db_manager.py
+│   └── integration/
+│       ├── test_api.py
+│       └── test_web_interface.py
 ├── docs/
+│   └── README.md
 ├── scripts/
+│   ├── run_tests.sh
+│   └── setup_dev_env.sh
 └── alembic/
+    ├── env.py
+    └── versions/
+        └── (migration files)
 ```
 
 ## Implementation Guide

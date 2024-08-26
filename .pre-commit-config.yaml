@@ -1,37 +1,38 @@
 # Global file settings
-files: ^(api/|deployment/|services/)
-exclude: ^(web-app/)
+files: ^(src|tests)/.*\.(py|pyi)$
+exclude: ^(docs|scripts)/
 
 # Default stages and language version
 default_stages: [commit, push]
 default_language_version:
-  python: python3
+  python: python3.11
 
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.6.0
     hooks:
-      - id: trailing-whitespace  # Remove trailing whitespace
-      - id: end-of-file-fixer    # Ensure files end with a newline
-      - id: check-added-large-files  # Prevent large files from being added
-      - id: check-merge-conflict # Detect merge conflict strings
-      - id: check-yaml           # Check syntax of YAML files
-      - id: check-toml           # Check syntax of TOML files
-      - id: check-json           # Check syntax of JSON files
-      - id: check-xml            # Check syntax of XML files
-      - id: requirements-txt-fixer  # Ensure consistency in requirements.txt files
-      #      - id: fix-byte-order-marker  # Fix byte order marker (BOM) in files
-      - id: mixed-line-ending    # Check for mixed line endings
-        args: [--fix=no]
-      - id: no-commit-to-branch
+      - id: trailing-whitespace       # Remove trailing whitespace
+      - id: end-of-file-fixer         # Ensure files end with a newline
+      - id: check-added-large-files   # Prevent large files from being added
+      - id: check-merge-conflict      # Detect merge conflict strings
+      - id: check-yaml                # Check syntax of YAML files
+      - id: check-toml                # Check syntax of TOML files
+      - id: check-json                # Check syntax of JSON files
+      - id: check-xml                 # Check syntax of XML files
+      - id: requirements-txt-fixer    # Ensure consistency in requirements.txt files
+      - id: detect-private-key        # Detect private key files
+      - id: fix-byte-order-marker     # Fix byte order marker (BOM) in files
+      - id: mixed-line-ending         # Check for mixed line endings
+        args: [--fix=lf]
+      - id: no-commit-to-branch       # Prevent commits to specific branches
         args: [--branch, main]
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.4.7
+    rev: v0.6.2
     hooks:
       - id: ruff
         types_or: [ python, pyi, jupyter ]
-        args: [ --fix, --exit-non-zero-on-fix, --select=I ]
+        args: [ --fix, --exit-non-zero-on-fix ]
       - id: ruff-format
         types_or: [ python, pyi, jupyter ]
 
@@ -39,30 +40,34 @@ repos:
     rev: v3.17.0
     hooks:
       - id: pyupgrade
-        args: [--py36-plus]
+        args: [--py311-plus]
 
   - repo: https://github.com/PyCQA/bandit
-    rev: 1.7.8
+    rev: 1.7.9
     hooks:
       - id: bandit
         args: [ "-c", "pyproject.toml" ]
         additional_dependencies: [ "bandit[toml]" ]
 
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.11.1
+    rev: v1.11.2
     hooks:
       - id: mypy
         args: ["--config-file", "pyproject.toml"]
 
-#  # Add TypeScript/JavaScript linting for web-app
-#  - repo: https://github.com/pre-commit/mirrors-eslint
-#    rev: v8.40.0
-#    hooks:
-#      - id: eslint
-#        files: ^web-app/.*\.(js|ts|tsx)$
-#        types: [file]
-#        additional_dependencies:
-#          - eslint
-#          - typescript
-#          - '@typescript-eslint/parser'
-#          - '@typescript-eslint/eslint-plugin'
+  - repo: local
+    hooks:
+      - id: pytest-check
+        name: pytest-check
+        entry: pytest
+        language: system
+        types: [python]
+        pass_filenames: false
+        always_run: true
+        args: [
+          "-v",
+          "--tb=short",
+          "--cov=src",
+          "--cov-report=term-missing",
+          "--cov-fail-under=80"
+        ]

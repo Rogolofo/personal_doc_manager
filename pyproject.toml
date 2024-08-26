@@ -1,15 +1,29 @@
 [project]
-name = "Personal Document Management System"
+name = "Personal-Document-Management-System"
 version = "0.0.1"
-description = "My project"
+description = "A system designed to help individuals digitize, organize, and manage their personal documents efficiently."
+requires-python = ">=3.11"
 
 [build-system]
-
-[tool]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
 
 [tool.ruff]
+line-length = 120
+target-version = "py311"
+
+[tool.ruff.lint]
+select = [
+    "E", "F", "B", "I", "N", "UP", "S", "BLE", "FBT", "C4", "T20", "PT",
+    "Q", "SIM", "TID", "ARG", "ERA", "PL", "RUF", "D"
+]
+ignore = ["D203", "D213"]
+
+[tool.pyupgrade]
+py311-plus = true
 
 [tool.bandit]
+exclude_dirs = ["tests"]
 
 [tool.mypy]
 python_version = "3.11"
@@ -34,10 +48,8 @@ cache_dir = ".mypy_cache"
 incremental = true
 
 # Excluded modules
-exclude = [
-]
+exclude = ["docs/*", "scripts/*"]
 
 # Per module settings
 [[tool.mypy.overrides]]
 module = "my_module"
-

@@ -1,0 +1,5 @@
+Metadata-Version: 2.1
+Name: Personal-Document-Management-System
+Version: 0.0.1
+Summary: A system designed to help individuals digitize, organize, and manage their personal documents efficiently.
+Requires-Python: >=3.11
