@@ -4,5 +4,40 @@ version = "0.0.1"
 description = "My project"
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+
+[tool]
+
+[tool.ruff]
+
+[tool.bandit]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+
+# Error output verbosity
+show_column_numbers = true
+show_error_codes = true
+color_output = true
+
+# Check complete code
+check_untyped_defs = true
+disallow_incomplete_defs = true
+disallow_untyped_defs = true
+
+# Miscellaneous
+warn_unused_ignores = true
+warn_unused_configs = true
+
+# Performance
+cache_dir = ".mypy_cache"
+incremental = true
+
+# Excluded modules
+exclude = [
+]
+
+# Per module settings
+[[tool.mypy.overrides]]
+module = "my_module"
+
