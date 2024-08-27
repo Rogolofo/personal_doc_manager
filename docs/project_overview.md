@@ -1,5 +1,13 @@
 # Personal Document Management System (PDMS)
 
+FastAPI: backend  
+Streamlit: frontend  
+
+pydantic: data validation  
+
+MongoDB: document storage  
+PostgreSQL: metadata storage  
+
 ## Project Purpose
 
 The Personal Document Management System (PDMS) is designed to help individuals digitize, organize, and manage their personal documents efficiently. It aims to solve the problem of paper clutter and make personal document retrieval quick and easy.
