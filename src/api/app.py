@@ -5,15 +5,15 @@ from src.config.config import settings
 
 
 def create_app() -> FastAPI:
-    app = FastAPI(title=settings.APP_TITLE)
+    base_app = FastAPI(title=settings.APP_TITLE)
 
-    app.include_router(
+    base_app.include_router(
         document_routes.router,
         prefix="/api/v1",
         tags=["documents"]
     )
 
-    return app
+    return base_app
 
 
 app = create_app()

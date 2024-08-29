@@ -1,9 +1,11 @@
 from pathlib import Path
+from uuid import UUID
 
 from pydantic import BaseModel, Field, NonNegativeInt
 from datetime import datetime
 from typing import List, Optional
 
+from models.tag import Tag
 from src.enums.document_categories import DocumentCategory
 from src.models.person import Person
 
@@ -21,11 +23,11 @@ class Document(BaseModel):
         pages (NonNegativeInt): Number of pages in the document.
         created_at (datetime): The creation date and time of the document.
     """
-
-    title: str
+    file_name: str
+    file_type: str
     file_path: Path
     category: List[DocumentCategory]
-    tags: Optional[List[str]] = Field(default_factory=list)
+    tags: Optional[List[Tag]] = Field(default_factory=list)
     persons: Optional[List[Person]] = Field(default_factory=list)
     pages: NonNegativeInt = Field(default=1, ge=1)
     created_at: datetime = Field(default_factory=datetime.now)

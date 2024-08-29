@@ -1,12 +1,27 @@
 # Personal Document Management System (PDMS)
 
-FastAPI: backend  
-Streamlit: frontend  
+## Technology stack
+
+FastAPI: WEB backend  
+Streamlit: WEB frontend
 
 pydantic: data validation  
 
-MongoDB: document storage  
-PostgreSQL: metadata storage  
+MongoDB: document storage (is a NoSQL db really the best choice here?)  
+PostgreSQL: metadata storage (what even is metadata in this case?)  
+
+## Supported document types
+Initially supports PDF and image
+
+## Planned features
+- Frontend to upload documents will have a button which lets you take a photo, choose an image from you gallery or upload a PDF.  
+After uploading a document you have to add a category and can (optionally) add tags and persons to it.  
+
+- The backend will then process the document and added information and store it in the database.
+
+- The frontend will also have a search bar to search for documents.
+
+- In a second development phase project will also use some form of machine learning to classify documents. The categories set by the user will be used as training data.
 
 ## Project Purpose
 
